@@ -258,21 +258,26 @@ namespace SCME.WpfControlLibrary.DataProviders
             return new Dictionary<string, DutPackageType>
             {
                 {"А1", DutPackageType.A1 },
+                {"И1", DutPackageType.I1 },
+                {"И6", DutPackageType.I6 },
                 {"Б1", DutPackageType.B1 },
                 {"Б2", DutPackageType.B2 },
                 {"Б3", DutPackageType.B3 },
                 {"Б5", DutPackageType.B5 },
-                {"Д1", DutPackageType.D1 },
-                {"Д192", DutPackageType.D192 },
-                {"Д2", DutPackageType.D2 },
-                {"И1", DutPackageType.I1 },
-                {"И2", DutPackageType.I2 },
+                {"В1", DutPackageType.V1 },
+                {"В2", DutPackageType.V2 },
+                {"В108", DutPackageType.V108 },
                 {"Л1", DutPackageType.L1 },
                 {"Л2", DutPackageType.L2 },
-                {"В1", DutPackageType.V1 },
-                {"В108", DutPackageType.V108 },
-                {"В2", DutPackageType.V2 },
-                {"В104", DutPackageType.V104 }
+                {"Д1", DutPackageType.D1 },
+                {"Д2", DutPackageType.D2 },
+                {"Д192", DutPackageType.D192 },
+                {"В104", DutPackageType.V104 },
+                {"И12", DutPackageType.I12 },
+                {"Т1", DutPackageType.T1 },
+                {"Е2к", DutPackageType.E2k },
+                {"А6", DutPackageType.A6 },
+                {"Б1а", DutPackageType.B1a }
             };
         }
 
