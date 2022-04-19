@@ -118,6 +118,8 @@ namespace SCME.WpfControlLibrary.ViewModels
             public bool UseEx => MinEx != null;
             [DependsOn(nameof(ValueEx))]
             public bool IsEmptyEx => ValueEx == null;
+            [DependsOn(nameof(ValueEx))]
+            public bool IsGoodEx => (IsOkEx ?? true);
 
             [DependsOn(nameof(ValueEx), nameof(MinEx), nameof(MaxEx))]
             public bool? IsOkEx => MinEx == null || ValueEx?.CompareTo(double.Epsilon) == 0 ? (bool?)null : (MinEx < ValueEx && ValueEx < MaxEx);
@@ -154,13 +156,13 @@ namespace SCME.WpfControlLibrary.ViewModels
 
 
         public bool LeakageCurrentsIsEmpty => LeakageCurrents.FirstOrDefault(m => !m.IsEmpty) == null;
-        public bool ResidualVoltagesIsEmpty => ResidualVoltages.FirstOrDefault(m => !m.IsEmpty) == null && ResidualVoltages.FirstOrDefault(m => !m.IsEmpty) == null;
+        public bool ResidualVoltagesIsEmpty => ResidualVoltages.FirstOrDefault(m => !m.IsEmpty) == null && ResidualVoltages.FirstOrDefault(m => !m.IsEmptyEx) == null;
         public bool InputAmperagesIsEmpty => InputAmperages.FirstOrDefault(m => !m.IsEmpty) == null;
         public bool InputVoltagesIsEmpty => InputVoltages.FirstOrDefault(m => !m.IsEmpty) == null;
 
 
         public bool LeakageCurrentsIsGood => LeakageCurrents.FirstOrDefault(m => !m.IsGood) == null;
-        public bool ResidualVoltagesIsGood => ResidualVoltages.FirstOrDefault(m => !m.IsGood) == null && ResidualVoltages.FirstOrDefault(m => !m.IsGood) == null;
+        public bool ResidualVoltagesIsGood => ResidualVoltages.FirstOrDefault(m => !m.IsGood) == null && ResidualVoltages.FirstOrDefault(m => !m.IsGoodEx) == null;
         public bool InputAmperagesIsGood => InputAmperages.FirstOrDefault(m => !m.IsGood) == null;
         public bool InputVoltagesIsGood => InputVoltages.FirstOrDefault(m => !m.IsGood) == null;
 

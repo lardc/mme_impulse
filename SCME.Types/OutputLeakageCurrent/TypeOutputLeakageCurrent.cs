@@ -37,7 +37,7 @@ namespace SCME.Types.OutputLeakageCurrent
         public double LeakageCurrentMinimumMax => ApplicationPolarityConstantSwitchingVoltage == ApplicationPolarityConstantSwitchingVoltage.ACVoltage ? 100 : 20;
 
         [DependsOn(nameof(ApplicationPolarityConstantSwitchingVoltage))]
-        public double LeakageCurrentMaximumMin => ApplicationPolarityConstantSwitchingVoltage == ApplicationPolarityConstantSwitchingVoltage.ACVoltage ? 0.01 : 0.006;
+        public double LeakageCurrentMaximumMin => ApplicationPolarityConstantSwitchingVoltage == ApplicationPolarityConstantSwitchingVoltage.ACVoltage ? 0.01 : 0.001;
         [DependsOn(nameof(ApplicationPolarityConstantSwitchingVoltage))]
         public double LeakageCurrentMaximumMax => ApplicationPolarityConstantSwitchingVoltage == ApplicationPolarityConstantSwitchingVoltage.ACVoltage ? 100 : 20;
 
