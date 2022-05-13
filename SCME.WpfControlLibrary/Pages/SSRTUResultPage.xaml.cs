@@ -773,20 +773,20 @@ namespace SCME.WpfControlLibrary.Pages
 
 
             foreach(var i in values.SelectMany(m => m.LeakageCurrents).Where(m=> m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
-                AddCellThString($"Ток утечки {i.Key}", tr);
+                AddCellThString($"Ток утечки {i.Key}, мА", tr);
 
             foreach (var i in values.SelectMany(m => m.InputAmperages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
-                AddCellThString($"Ток входа {i.Key}", tr);
+                AddCellThString($"Ток входа {i.Key}, мА", tr);
 
             foreach (var i in values.SelectMany(m => m.InputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
-                AddCellThString($"Напряжение входа {i.Key}", tr);
+                AddCellThString($"Напряжение входа {i.Key}, В", tr);
 
             //Корректировки от 25.03.2022
             foreach (var i in values.SelectMany(m => m.ResidualVoltages).Where(m => m.Min != null && !m.UseEx).OrderBy(m => m.Index).GroupBy(m => m.Index))
-                AddCellThString($"Выходное ост. напр. {i.Key}", tr);
+                AddCellThString($"Выходное ост. напр. {i.Key}, В", tr);
 
             foreach (var i in values.SelectMany(m => m.ResidualVoltages).Where(m => m.MinEx != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
-                AddCellThString($"Сопр. в откр. сост. {i.Key}", tr);
+                AddCellThString($"Сопр. в откр. сост. {i.Key}, Ом", tr);
 
             if (auxiliarPower?.AuxiliaryCurrentPowerSupplyMin1 != null)
                 AddCellThString($"Ток вспом. пит. 1", tr);
