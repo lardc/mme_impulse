@@ -412,7 +412,7 @@ namespace SCME.WpfControlLibrary.Pages
             return tr;
         }
 
-        private void AddCellTdString(double? value, HtmlNode tr)
+        private HtmlNode AddCellTdString(double? value, HtmlNode tr)
         {
             var td = _doc.CreateElement("td");
 
@@ -422,6 +422,8 @@ namespace SCME.WpfControlLibrary.Pages
                 td.InnerHtml = Math.Round(value.Value, 3).ToString();
 
             tr.AppendChild(td);
+
+            return td;
         }
 
         private void AddCellTdString(string value, HtmlNode tr, Dictionary<string, string> attributes = null)
@@ -629,7 +631,9 @@ namespace SCME.WpfControlLibrary.Pages
                                 AddCellTdString(res.Max, tr);
                                 break;
                             case SelectorMinMaxValue.Value:
-                                AddCellTdString(res.Value, tr);
+                                var node = AddCellTdString(res.Value, tr);
+                                if (res.Value < res.Min || res.Value > res.Max)
+                                    node.SetAttributeValue("style", "background-color:#eb3434");
                                 break;
                         }
                         n++;

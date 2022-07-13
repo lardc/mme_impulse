@@ -20,7 +20,7 @@ namespace SCME.WpfControlLibrary.ViewModels
 
         public string ErrorCode { get; set; }
         public bool IsEmpty => LeakageCurrentsIsEmpty && InputAmperagesIsEmpty && InputVoltagesIsEmpty && ResidualVoltagesIsEmpty && AuxiliaryCurrentPowerSupply1 == null && AuxiliaryCurrentPowerSupply2 == null;
-        public bool IsGood => LeakageCurrentsIsGood && InputAmperagesIsGood && InputVoltagesIsGood && ResidualVoltagesIsGood && (AuxiliaryCurrentPowerSupply1IsOk ?? true) && (AuxiliaryCurrentPowerSupply1IsOk ?? true);
+        public bool IsGood => LeakageCurrentsIsGood && InputAmperagesIsGood && InputVoltagesIsGood && ResidualVoltagesIsGood && (AuxiliaryCurrentPowerSupply1IsOk ?? true) && (AuxiliaryCurrentPowerSupply2IsOk ?? true);
 
 
         //public bool IsGood => (LeakageCurrentMin == null || (LeakageCurrentMin != null && LeakageCurrentIsOk.Value)) && 
