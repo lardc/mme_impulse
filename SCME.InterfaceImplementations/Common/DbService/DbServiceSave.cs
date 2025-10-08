@@ -350,6 +350,7 @@ namespace SCME.InterfaceImplementations.Common.DbService
                 {"Im_TypeManagement", (int)data.TypeManagement},
                 {"Im_AuxiliaryVoltagePowerSupply1", data.AuxiliaryVoltagePowerSupply1},
                 {"Im_AuxiliaryVoltagePowerSupply2", data.AuxiliaryVoltagePowerSupply2},
+                {"Im_IsMosfet", data.IsIGBTOrMosfet},
             };
 
             if (data.ShowAuxiliaryCurrentPowerSupplyMax1)
@@ -408,6 +409,7 @@ namespace SCME.InterfaceImplementations.Common.DbService
                 {"Im_SwitchedVoltage", data.SwitchedVoltage},
                 {"Im_AuxiliaryVoltagePowerSupply1", data.AuxiliaryVoltagePowerSupply1},
                 {"Im_AuxiliaryVoltagePowerSupply2", data.AuxiliaryVoltagePowerSupply2},
+                {"Im_IsMosfet", data.IsIGBTOrMosfet},
             };
 
             if (data.ShowAuxiliaryCurrentPowerSupplyMax1)
@@ -448,7 +450,8 @@ namespace SCME.InterfaceImplementations.Common.DbService
                 {"Im_AuxiliaryVoltagePowerSupply2", data.AuxiliaryVoltagePowerSupply2},
                 {"Im_SwitchingCurrentPulseShape", (int)data.SwitchingCurrentPulseShape},
                 {"Im_SwitchingCurrentPulseDuration", data.SwitchingCurrentPulseDuration},
-                {"Im_OpenState", data.OpenState }
+                {"Im_OpenState", data.OpenState },
+                {"Im_IsMosfet", data.IsIGBTOrMosfet},
             };
 
             if (data.ShowAuxiliaryCurrentPowerSupplyMax1)

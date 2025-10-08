@@ -39,7 +39,36 @@
                             <Border Background="#FFC9C9C9" BorderThickness="0" Grid.ColumnSpan="5"/>
                             <Label Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Margin="40,0,0,0" FontWeight="SemiBold" >
                                 <TextBlock  FontWeight="SemiBold">
-                                    <Run Text="{Binding Mode=OneWay, Converter={StaticResource TP2S}}" FontWeight="SemiBold"/>
+                                    <Run FontWeight="SemiBold">
+                                        <Run.Style>
+                                            <Style TargetType="Run">
+                                                <Setter Property="Text" Value="{Binding Mode=OneWay, Converter={StaticResource TP2S}}"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Mode=OneWay, Converter={StaticResource TP2S}}" Value="Ток утечки на выходе"/>
+                                                            <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Path=DataContext.IsIGBTOrMosfet}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Text" Value="Начальный ток стока"/>
+                                                    </MultiDataTrigger>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Mode=OneWay, Converter={StaticResource TP2S}}" Value="Выходное остаточное напряжение"/>
+                                                            <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Path=DataContext.IsIGBTOrMosfet}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Text" Value="Падение напряжения на оппоз. диоде"/>
+                                                    </MultiDataTrigger>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Mode=OneWay, Converter={StaticResource TP2S}}" Value="Параметры входа"/>
+                                                            <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, Path=DataContext.IsIGBTOrMosfet}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Text" Value="Параметры затвора-истока"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Run.Style>
+                                    </Run>
                                      <Run Text="{Binding Mode=OneWay, Path=Index}" FontWeight="SemiBold"/>
                                 </TextBlock>
                             </Label>

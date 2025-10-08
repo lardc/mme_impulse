@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SCME.WpfControlLibrary.Pages;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace SCME.WpfControlLibrary.CustomControls.ProfilesPageComponents
 {
@@ -20,6 +22,14 @@ namespace SCME.WpfControlLibrary.CustomControls.ProfilesPageComponents
 
         private void AddTestParameters_Click(object sender, RoutedEventArgs e)
         {
+            string test = TestComboBox.Text;
+            DependencyObject parent = VisualTreeHelper.GetParent(sender as Button);
+            while (parent != null && !(parent is Page))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            ((ProfilesPage)parent).ProfileVm.SelectedTest = test;
+
             AddTestParametersEvent?.Invoke();
         }
 

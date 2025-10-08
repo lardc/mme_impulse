@@ -69,7 +69,7 @@
 
     <Label Grid.Column="3" Grid.Row="1"  Visibility="{Binding ShowVoltage, Converter={StaticResource B2V}}">
         <TextBlock>
-            Ограничение по току<LineBreak/>Управления, мА
+            Ограничение по току<LineBreak/>управления, мА
         </TextBlock>
     </Label>
     <customControls:NumericUpDown Grid.Column="4" Grid.Row="1" Visibility="{Binding ShowVoltage, Converter={StaticResource B2V}}" Value="{Binding ControlCurrentMaximum, Converter={StaticResource DML}}"
@@ -112,7 +112,7 @@
 
     <Label Grid.Column="0" Grid.Row="5" Visibility="{Binding ShowAuxiliaryCurrentPowerSupplyMax1, Converter={StaticResource B2V}}">
         <TextBlock>
-            Ограничение по току <LineBreak/>вспом. питания1, мА
+            Ограничение по току <LineBreak/>вспом. питания 1, мА
         </TextBlock>
     </Label>
     <customControls:NumericUpDown Grid.Column="1" Grid.Row="5"  Visibility="{Binding ShowAuxiliaryCurrentPowerSupplyMax1, Converter={StaticResource B2V}}" Value="{Binding AuxiliaryCurrentPowerSupplyMaximum1, Converter={StaticResource DML}}" 
@@ -120,7 +120,7 @@
 
     <Label Grid.Column="3" Grid.Row="5" Visibility="{Binding ShowAuxiliaryCurrentPowerSupplyMax2, Converter={StaticResource B2V}}">
         <TextBlock>
-            Ограничение по току <LineBreak/>вспом. питания2, мА
+            Ограничение по току <LineBreak/>вспом. питания 2, мА
         </TextBlock>
     </Label>
     <customControls:NumericUpDown Grid.Column="4" Grid.Row="5"  Visibility="{Binding ShowAuxiliaryCurrentPowerSupplyMax2, Converter={StaticResource B2V}}" Value="{Binding AuxiliaryCurrentPowerSupplyMaximum2, Converter={StaticResource DML}}" 
@@ -139,11 +139,33 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"   Content="Ток утечки мин, мА" ></Label>
+        <Label Grid.Column="0" TextElement.Foreground="Black">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Content" Value="Ток утечки мин, мА"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
+                            <Setter Property="Content" Value="Нач. ток стока мин, мА"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
         <customControls:NumericUpDown Grid.Column="1"   Value="{Binding LeakageCurrentMinimum, Converter={StaticResource DML}}" 
                                       Minimum="{Binding LeakageCurrentMinimumMin}" Maximum="{Binding LeakageCurrentMinimumMax}"/>
 
-        <Label Grid.Column="3"  Content="Ток утечки макс, мА" ></Label>
+        <Label Grid.Column="3" TextElement.Foreground="Black">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Content" Value="Ток утечки макс, мА"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
+                            <Setter Property="Content" Value="Нач. ток стока макс, мА"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
         <customControls:NumericUpDown Grid.Column="4"   Value="{Binding LeakageCurrentMaximum, Converter={StaticResource DML}}" 
                                       Minimum="{Binding LeakageCurrentMaximumMin}" Maximum="{Binding LeakageCurrentMaximumMax}"/>
         
@@ -161,10 +183,29 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" >
-            <TextBlock>
+        <Label Grid.Column="0" TextElement.FontSize="22" TextElement.Foreground="Black">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock TextAlignment="Right">
                 Ограничение по<LineBreak/>току утечки, мА
-            </TextBlock>
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock TextAlignment="Right">
+Ограничение по нач.<LineBreak/>току стока, мА
+                                    </TextBlock>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
         </Label>
         <customControls:NumericUpDown Grid.Column="1"   Value="{Binding LeakageCurrentMaximum, Converter={StaticResource DML}}"  />
 

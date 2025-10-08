@@ -1,14 +1,9 @@
 ﻿using SCME.Types;
+using SCME.Types.BaseTestParams;
+using SCME.Types.SSRTU;
 using SCME.UIServiceConfig.Properties;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SCME.Types.SSRTU;
 using System.Threading;
-using SCME.Types.BaseTestParams;
-using System.Windows.Forms;
 
 namespace SCME.Service.IO
 {
@@ -348,6 +343,15 @@ namespace SCME.Service.IO
                 _Result.NumberPosition = parameters.NumberPosition;
 
             _Result.Index = parameters.Index;
+
+            _Result.IsIGBTOrMosfet = parameters.IsIGBTOrMosfet;
+
+            if (parameters is Types.InputOptions.TestParameters && parameters.IsIGBTOrMosfet)
+            {
+                FireSSRTUEvent(DeviceState.Success, _Result);
+                return true;
+            }
+
             try
             {
                 //_State = DeviceState.InProcess;

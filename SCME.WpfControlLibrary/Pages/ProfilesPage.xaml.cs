@@ -1,4 +1,10 @@
-﻿using System;
+﻿using SCME.Types;
+using SCME.Types.BaseTestParams;
+using SCME.Types.Database;
+using SCME.Types.Profiles;
+using SCME.WpfControlLibrary.CustomControls;
+using SCME.WpfControlLibrary.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,12 +14,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using SCME.Types;
-using SCME.Types.BaseTestParams;
-using SCME.Types.Database;
-using SCME.Types.Profiles;
-using SCME.WpfControlLibrary.CustomControls;
-using SCME.WpfControlLibrary.ViewModels;
 
 namespace SCME.WpfControlLibrary.Pages
 {
@@ -131,16 +131,25 @@ namespace SCME.WpfControlLibrary.Pages
             for(int i = 1; i <= 3; i++)
             {
                 string error = null;
-                if (ProfileVm.SelectedTestParametersType == TestParametersType.AuxiliaryPower && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.AuxiliaryPower && m.NumberPosition == i) > 1)
-                    error = "Превышен лимит измерений для типа вспомогательное напряжение";
-                if (ProfileVm.SelectedTestParametersType == TestParametersType.InputOptions && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.InputOptions && m.NumberPosition == i) > 4 )
-                    error = "Превышен лимит измерений для типа параметры входа";
-                if (ProfileVm.SelectedTestParametersType == TestParametersType.OutputLeakageCurrent && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.OutputLeakageCurrent && m.NumberPosition == i) > 3)
-                    error = "Превышен лимит измерений для типа ток утечки на выходе";
-                if (ProfileVm.SelectedTestParametersType == TestParametersType.OutputResidualVoltage && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.OutputResidualVoltage && m.NumberPosition == i) > 2)
-                    error = "Превышен лимит измерений для типа выходное остаточное напряжение";
 
-                if(error != null)
+                if (ProfileVm.SelectedTestParametersType == TestParametersType.InputOptions && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.InputOptions && m.NumberPosition == i && !m.IsIGBTOrMosfet) > 4)
+                    error = "Превышен лимит измерений типа \"Ток утечки на выходе\"";
+                if (ProfileVm.SelectedTestParametersType == TestParametersType.OutputLeakageCurrent && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.OutputLeakageCurrent && m.NumberPosition == i && !m.IsIGBTOrMosfet) > 4)
+                    error = "Превышен лимит измерений типа \"Выходное остаточное напряжение\"";
+                if (ProfileVm.SelectedTestParametersType == TestParametersType.OutputResidualVoltage && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.OutputResidualVoltage && m.NumberPosition == i && !m.IsIGBTOrMosfet) > 4)
+                    error = "Превышен лимит измерений типа \"Параметры входа\"";
+
+                if (ProfileVm.SelectedTestParametersType == TestParametersType.InputOptions && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.InputOptions && m.NumberPosition == i && m.IsIGBTOrMosfet) > 4)
+                    error = "Превышен лимит измерений типа \"Начальный ток стока\"";
+                if (ProfileVm.SelectedTestParametersType == TestParametersType.OutputLeakageCurrent && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.OutputLeakageCurrent && m.NumberPosition == i && m.IsIGBTOrMosfet) > 4)
+                    error = "Превышен лимит измерений типа \"Падение напряжения на оппоз. диоде\"";
+                if (ProfileVm.SelectedTestParametersType == TestParametersType.OutputResidualVoltage && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.OutputResidualVoltage && m.NumberPosition == i && m.IsIGBTOrMosfet) > 4)
+                    error = "Превышен лимит измерений типа \"Параметры затвора-истока\"";
+
+                if (ProfileVm.SelectedTestParametersType == TestParametersType.AuxiliaryPower && testParametersAndNormatives.Count(m => m.TestParametersType == TestParametersType.AuxiliaryPower && m.NumberPosition == i) > 1)
+                    error = "Превышен лимит измерений типа\"Вспомогательное питание\"";
+
+                if (error != null)
                 {
                     DialogWindow dw = new DialogWindow("Ошибка", $"{error}. Номер канала: {i}");
                     dw.ShowDialog();
@@ -201,8 +210,16 @@ namespace SCME.WpfControlLibrary.Pages
         public static void CheckIndexes(ObservableCollection<BaseTestParametersAndNormatives> parameters)
         {
 
-            var q = parameters.GroupBy(m => m.TestParametersType).ToList();
-            foreach (var i in parameters.GroupBy(m => m.TestParametersType))
+            var q = parameters.GroupBy(m => new
+            {
+                m.TestParametersType,
+                m.IsIGBTOrMosfet
+            }).ToList();
+            foreach (var i in parameters.GroupBy(m => new
+            {
+                m.TestParametersType,
+                m.IsIGBTOrMosfet
+            }))
             {
                 var w = i.GroupBy(m => m.NumberPosition).ToList();
                 foreach (var j in i.GroupBy(m => m.NumberPosition))
@@ -255,13 +272,22 @@ namespace SCME.WpfControlLibrary.Pages
             newTestParameter.IsEnabled = true;
             newTestParameter.Order = maxOrder + 1;
 
-            
-            testParametersAndNormatives.Add(newTestParameter);
-            CheckIndexes(ProfileVm.ProfileDeepDataCopy.TestParametersAndNormatives);
+            //Начальный ток стока
+            if (newTestParameter.TestParametersType == TestParametersType.OutputLeakageCurrent && ProfileVm.SelectedTest == "Начальный ток стока")
+                ((SCME.Types.OutputLeakageCurrent.TestParameters)newTestParameter).IsIGBTOrMosfet = true;
+            //Падение напряжения на оппоз. диоде
+            if (newTestParameter.TestParametersType == TestParametersType.OutputResidualVoltage && ProfileVm.SelectedTest == "Падение напряжения на оппоз. диоде")
+                ((SCME.Types.OutputResidualVoltage.TestParameters)newTestParameter).IsIGBTOrMosfet = true;
+            //Параметры затвора-истока
+            if (newTestParameter.TestParametersType == TestParametersType.InputOptions && ProfileVm.SelectedTest == "Параметры затвора-истока")
+                ((SCME.Types.InputOptions.TestParameters)newTestParameter).IsIGBTOrMosfet = true;
 
             if (newTestParameter.TestParametersType == TestParametersType.AuxiliaryPower)
-                    foreach (var i in testParametersAndNormatives)
-                        i.HaveAuxiliaryPower = true;
+                foreach (var i in testParametersAndNormatives)
+                    i.HaveAuxiliaryPower = true;
+
+            testParametersAndNormatives.Add(newTestParameter);
+            CheckIndexes(ProfileVm.ProfileDeepDataCopy.TestParametersAndNormatives);
 
             listViewTestParameters.ScrollBottom();
         }

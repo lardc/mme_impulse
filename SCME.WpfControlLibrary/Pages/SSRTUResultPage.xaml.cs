@@ -1,19 +1,19 @@
-﻿using SCME.Types;
+﻿using HtmlAgilityPack;
+using SCME.Types;
 using SCME.Types.BaseTestParams;
 using SCME.Types.Profiles;
 using SCME.WpfControlLibrary.CustomControls;
+using SCME.WpfControlLibrary.DataProviders;
 using SCME.WpfControlLibrary.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using HtmlAgilityPack;
-using SCME.WpfControlLibrary.DataProviders;
-using System.IO;
-using System.Diagnostics;
-using System.Reflection;
 using System.Windows.Threading;
 
 namespace SCME.WpfControlLibrary.Pages
@@ -75,6 +75,24 @@ namespace SCME.WpfControlLibrary.Pages
                 switch (i)
                 {
                     case SCME.Types.InputOptions.TestParameters j:
+                        if (j.IsIGBTOrMosfet)
+                        {
+                            if (j.TypeManagement == Types.TypeManagement.DCAmperage)
+                            {
+                                var inputOptionsMosfet = sSRTUResultComponentVM.IGBTOrMosfetInputVoltages[i.Index - 1];
+                                inputOptionsMosfet.Min = j.InputVoltageMinimum;
+                                inputOptionsMosfet.Max = j.InputVoltageMaximum;
+                                inputOptionsMosfet.Value = double.Epsilon;
+                            }
+                            else
+                            {
+                                var inputOptionsMosfet = sSRTUResultComponentVM.IGBTOrMosfetInputAmperages[i.Index - 1];
+                                inputOptionsMosfet.Min = j.InputCurrentMinimum;
+                                inputOptionsMosfet.Max = j.InputCurrentMaximum;
+                                inputOptionsMosfet.Value = double.Epsilon;
+                            }
+                            break;
+                        }
                         if (j.TypeManagement == Types.TypeManagement.DCAmperage)
                         {
                             var inputOptions = sSRTUResultComponentVM.InputVoltages[i.Index-1];
@@ -109,12 +127,37 @@ namespace SCME.WpfControlLibrary.Pages
                         }
                         break;
                     case SCME.Types.OutputLeakageCurrent.TestParameters j:
+                        if (j.IsIGBTOrMosfet)
+                        {
+                            var leakageCurrentMosfet = sSRTUResultComponentVM.IGBTOrMosfetLeakageCurrents[i.Index - 1];
+                            leakageCurrentMosfet.Min = j.LeakageCurrentMinimum;
+                            leakageCurrentMosfet.Max = j.LeakageCurrentMaximum;
+                            leakageCurrentMosfet.Value = double.Epsilon;
+                            break;
+                        }
                         var leakageCurrent = sSRTUResultComponentVM.LeakageCurrents[i.Index-1];
                         leakageCurrent.Min = j.LeakageCurrentMinimum;
                         leakageCurrent.Max = j.LeakageCurrentMaximum;
                         leakageCurrent.Value = double.Epsilon;
                         break;
                     case SCME.Types.OutputResidualVoltage.TestParameters j:
+                        if (j.IsIGBTOrMosfet)
+                        {
+                            var residualVoltageMosfet = sSRTUResultComponentVM.IGBTOrMosfetResidualVoltages[i.Index - 1];
+                            if (j.OpenState)
+                            {
+                                residualVoltageMosfet.MinEx = j.OpenResistanceMinimum;
+                                residualVoltageMosfet.MaxEx = j.OpenResistanceMaximum;
+                                residualVoltageMosfet.ValueEx = double.Epsilon;
+                            }
+                            else
+                            {
+                                residualVoltageMosfet.Min = j.OutputResidualVoltageMinimum;
+                                residualVoltageMosfet.Max = j.OutputResidualVoltageMaximum;
+                                residualVoltageMosfet.Value = double.Epsilon;
+                            }
+                            break;
+                        }
                         var residualVoltage = sSRTUResultComponentVM.ResidualVoltages[i.Index-1];
                         if (j.OpenState)
                         {
@@ -133,7 +176,6 @@ namespace SCME.WpfControlLibrary.Pages
                         break;
                 }
             }
-            
         }
 
         private void Dt_Tick(object sender, EventArgs e)
@@ -189,15 +231,31 @@ namespace SCME.WpfControlLibrary.Pages
                         VMPosition4.AuxiliaryCurrentPowerSupply2 = testResults.AuxiliaryCurrentPowerSupply2;
                     break;
                 case TestParametersType.InputOptions:
+                    if (testResults.IsIGBTOrMosfet)
+                        break;
                     if (testResults.InputOptionsIsAmperage)
                         q.InputAmperages[testResults.Index - 1].Value = testResults.Value;
                     else
                         q.InputVoltages[testResults.Index - 1].Value = testResults.Value;
                     break;
                 case TestParametersType.OutputLeakageCurrent:
+                    if (testResults.IsIGBTOrMosfet)
+                    {
+                        q.IGBTOrMosfetLeakageCurrents[testResults.Index - 1].Value = testResults.Value;
+                        break;
+                    }
                     q.LeakageCurrents[testResults.Index-1].Value = testResults.Value;
                     break;
                 case TestParametersType.OutputResidualVoltage:
+                    if (testResults.IsIGBTOrMosfet)
+                    {
+                        var residualVoltageMosfet = q.IGBTOrMosfetResidualVoltages[testResults.Index - 1];
+                        if (residualVoltageMosfet.MinEx != null)
+                            residualVoltageMosfet.ValueEx = testResults.OpenResistance;
+                        else
+                            residualVoltageMosfet.Value = testResults.Value;
+                        break;
+                    }
                     var residualVoltage = q.ResidualVoltages[testResults.Index - 1];
                     if (residualVoltage.MinEx != null)
                         residualVoltage.ValueEx = testResults.OpenResistance;
@@ -261,23 +319,37 @@ namespace SCME.WpfControlLibrary.Pages
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            if (!ManualParams_Checked())
+            {
+                var dialogWindow = new DialogWindow("Ошибка запуска", "Не все ручные параметры введены. Пожалуйста, внесите данные в соответствующие текстовые поля");
+                dialogWindow.ShowDialog();
+                return;
+            }
+
             foreach (var i in _profile.TestParametersAndNormatives)
             {
                 var sSRTUResultComponentVM = VMByPosition[i.NumberPosition];
 
                 foreach (var j in sSRTUResultComponentVM.LeakageCurrents.Where(j => j.Min != null))
                     j.Value = double.Epsilon;
-                
                 foreach (var j in sSRTUResultComponentVM.InputAmperages.Where(j => j.Min != null))
                     j.Value = double.Epsilon;
-                
                 foreach (var j in sSRTUResultComponentVM.InputVoltages.Where(j => j.Min != null))
                     j.Value = double.Epsilon;
-
                 foreach (var j in sSRTUResultComponentVM.ResidualVoltages.Where(j => j.Min != null))
                     j.Value = double.Epsilon;
-                
                 foreach (var j in sSRTUResultComponentVM.ResidualVoltages.Where(j => j.MinEx != null))
+                    j.ValueEx = double.Epsilon;
+
+                foreach (var j in sSRTUResultComponentVM.IGBTOrMosfetLeakageCurrents.Where(j => j.Min != null))
+                    j.Value = double.Epsilon;
+                foreach (var j in sSRTUResultComponentVM.IGBTOrMosfetInputAmperages.Where(j => j.Min != null))
+                    j.Value = double.Epsilon;
+                foreach (var j in sSRTUResultComponentVM.IGBTOrMosfetInputVoltages.Where(j => j.Min != null))
+                    j.Value = double.Epsilon;
+                foreach (var j in sSRTUResultComponentVM.IGBTOrMosfetResidualVoltages.Where(j => j.Min != null))
+                    j.Value = double.Epsilon;
+                foreach (var j in sSRTUResultComponentVM.IGBTOrMosfetResidualVoltages.Where(j => j.MinEx != null))
                     j.ValueEx = double.Epsilon;
 
                 if (sSRTUResultComponentVM.AuxiliaryCurrentPowerSupplyMin1 != null)
@@ -294,6 +366,33 @@ namespace SCME.WpfControlLibrary.Pages
             return;
         }
 
+        private bool ManualParams_Checked()
+        {
+            int ManualParamsCount = 0;
+            foreach (var i in _profile.TestParametersAndNormatives)
+            {
+                var sSRTUResultComponentVM = VMByPosition[i.NumberPosition];
+
+                if (sSRTUResultComponentVM.NeedsManualAmperage1 && sSRTUResultComponentVM.ManualAmperage1 == null)
+                    ManualParamsCount++;
+                if (sSRTUResultComponentVM.NeedsManualAmperage2 && sSRTUResultComponentVM.ManualAmperage2 == null)
+                    ManualParamsCount++;
+                if (sSRTUResultComponentVM.NeedsManualAmperage3 && sSRTUResultComponentVM.ManualAmperage3 == null)
+                    ManualParamsCount++;
+                if (sSRTUResultComponentVM.NeedsManualAmperage4 && sSRTUResultComponentVM.ManualAmperage4 == null)
+                    ManualParamsCount++;
+
+                if (sSRTUResultComponentVM.NeedsManualVoltage1 && sSRTUResultComponentVM.ManualVoltage1 == null)
+                    ManualParamsCount++;
+                if (sSRTUResultComponentVM.NeedsManualVoltage2 && sSRTUResultComponentVM.ManualVoltage2 == null)
+                    ManualParamsCount++;
+                if (sSRTUResultComponentVM.NeedsManualVoltage3 && sSRTUResultComponentVM.ManualVoltage3 == null)
+                    ManualParamsCount++;
+                if (sSRTUResultComponentVM.NeedsManualVoltage4 && sSRTUResultComponentVM.ManualVoltage4 == null)
+                    ManualParamsCount++;
+            }
+            return ManualParamsCount == 0;
+        }
 
         private HtmlDocument _doc = new HtmlDocument();
         private List<Dictionary<int, SSRTUResultComponentVM>> results = new List<Dictionary<int, SSRTUResultComponentVM>>();
@@ -303,6 +402,37 @@ namespace SCME.WpfControlLibrary.Pages
 
         private void CreateReport()
         {
+            //Группировка по серийному номеру
+            var GroupedResults = results.GroupBy(res => res.Values.Select(val => val.SerialNumber).First());
+            foreach (var ResInGroup in GroupedResults)
+                //Удаление первого вхождения при дубликатах
+                if (ResInGroup.Count() > 1)
+                    results.Remove(ResInGroup.First());
+            //Замена параметров ручными, если есть
+            var result = results.Last();
+            foreach (var res in result.Values)
+            {
+                if (res == null)
+                    continue;
+                if (res.NeedsManualAmperage1)
+                    res.IGBTOrMosfetInputAmperage1.Value = res.ManualAmperage1;
+                if (res.NeedsManualAmperage2)
+                    res.IGBTOrMosfetInputAmperage2.Value = res.ManualAmperage2;
+                if (res.NeedsManualAmperage3)
+                    res.IGBTOrMosfetInputAmperage3.Value = res.ManualAmperage3;
+                if (res.NeedsManualAmperage4)
+                    res.IGBTOrMosfetInputAmperage4.Value = res.ManualAmperage4;
+
+                if (res.NeedsManualVoltage1)
+                    res.IGBTOrMosfetInputVoltage1.Value = res.ManualVoltage1;
+                if (res.NeedsManualVoltage2)
+                    res.IGBTOrMosfetInputVoltage2.Value = res.ManualVoltage2;
+                if (res.NeedsManualVoltage3)
+                    res.IGBTOrMosfetInputVoltage3.Value = res.ManualVoltage3;
+                if (res.NeedsManualVoltage4)
+                    res.IGBTOrMosfetInputVoltage4.Value = res.ManualVoltage4;
+            }
+
             //Верхняя подпись
             // _dateTimeBeginMeasurement = DateTime.Now;
             HtmlNode tr;
@@ -317,7 +447,7 @@ namespace SCME.WpfControlLibrary.Pages
             body.AppendChild(tmpHtmlBody);
 
             tmpHtmlBody = _doc.CreateElement("p");
-            tmpHtmlBody.InnerHtml = $"Профиль испытания: Профиль {_profile.Name}";
+            tmpHtmlBody.InnerHtml = $"Профиль испытания: {_profile.Name}";
             body.AppendChild(tmpHtmlBody);
 
             tmpHtmlBody = _doc.CreateElement("p");
@@ -329,7 +459,7 @@ namespace SCME.WpfControlLibrary.Pages
             body.AppendChild(tmpHtmlBody);
 
             tmpHtmlBody = _doc.CreateElement("p");
-            tmpHtmlBody.InnerHtml = $"Оборудование: {_mme}";
+            tmpHtmlBody.InnerHtml = $"Оборудование: КИП ТР-101";
             body.AppendChild(tmpHtmlBody);
 
             //Параметры
@@ -396,6 +526,20 @@ namespace SCME.WpfControlLibrary.Pages
             //string fileName = $@"{_profile.Name}-{_dateTimeBeginMeasurement:yyyy-MM-dd-HH-mm}.html";
             string fileName = $@"{_profile.Name}_[{(string.IsNullOrEmpty(VM.BatchNumber) ? "NoBatchNumber" : VM.BatchNumber)}]_{_dateTimeBeginMeasurement.ToString("yyyy-MM-dd-HH-mm-ss")}.html";
             File.WriteAllText(System.IO.Path.Combine(reportFolder, fileName), File.ReadAllText("ReportTemplate.html").Replace("body", body.OuterHtml));
+
+            //Очистка ручных параметров
+            foreach (var vm in VMByPosition.Values)
+            {
+                vm.ManualAmperage1 = null;
+                vm.ManualAmperage2 = null;
+                vm.ManualAmperage3 = null;
+                vm.ManualAmperage4 = null;
+
+                vm.ManualVoltage1 = null;
+                vm.ManualVoltage2 = null;
+                vm.ManualVoltage3 = null;
+                vm.ManualVoltage4 = null;
+            }
         }
 
         private HtmlNode AddNumberPositions(BaseTestParametersAndNormatives[] parameters)
@@ -549,6 +693,23 @@ namespace SCME.WpfControlLibrary.Pages
                             voltages.Value = voltages.ValueEx;
                         }
 
+                    foreach (var voltagesIGBTOrMosfet in i.IGBTOrMosfetResidualVoltages)
+                        if (voltagesIGBTOrMosfet.UseEx)
+                        {
+
+                            voltagesIGBTOrMosfet.Min = voltagesIGBTOrMosfet.MinEx;
+                            voltagesIGBTOrMosfet.Max = voltagesIGBTOrMosfet.MaxEx;
+                            voltagesIGBTOrMosfet.Value = voltagesIGBTOrMosfet.ValueEx;
+                        }
+
+                    //Объединение токов и напряжений в общий массив
+                    for (int k = 0; k < i.IGBTOrMosfetInputAmperages.Count; k++)
+                        if (i.IGBTOrMosfetInputAmperages[k].Min != null)
+                        {
+                            i.IGBTOrMosfetInputVoltages[k] = i.IGBTOrMosfetInputAmperages[k];
+                            i.IGBTOrMosfetInputVoltages[k].IsAmp = true;
+                        }
+
                     td = _doc.CreateElement("td");
                     td.InnerHtml = i.Positition.ToString();
                     tr.AppendChild(td);
@@ -557,9 +718,17 @@ namespace SCME.WpfControlLibrary.Pages
                     AddMinMaxHeader(values.SelectMany(m => m.InputAmperages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.InputAmperages, tr, SelectorMinMaxValue.Value);
                     AddMinMaxHeader(values.SelectMany(m => m.InputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.InputVoltages, tr, SelectorMinMaxValue.Value);
                     AddMinMaxHeader(values.SelectMany(m => m.ResidualVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.ResidualVoltages.Where(m => m.Min != null), tr, SelectorMinMaxValue.Value);
-                    
+
+                    AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetLeakageCurrents).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetLeakageCurrents, tr, SelectorMinMaxValue.Value);
+                    AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetInputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetInputVoltages, tr, SelectorMinMaxValue.Value);
+
+                    //AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetInputAmperages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetInputAmperages.Where(m => m.Min != null), tr, SelectorMinMaxValue.Value);
+                    //AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetInputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetInputVoltages.Where(m => m.Min != null), tr, SelectorMinMaxValue.Value);
+
+                    AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetResidualVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetResidualVoltages.Where(m => m.Min != null), tr, SelectorMinMaxValue.Value);
+
                     //AddMinMaxExHeader(values.SelectMany(m => m.ResidualVoltages).Where(m => m.MinEx != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.ResidualVoltages.Where(m => m.MinEx != null), tr, SelectorMinMaxValue.Value);
-                    
+
                     if (auxiliarPower != null)
                     {
                         if (values.IndexOf(i) == 0)
@@ -700,7 +869,6 @@ namespace SCME.WpfControlLibrary.Pages
             var auxiliarPower = valuesI.SingleOrDefault(m => m?.Positition == 4);
             foreach (var i in values)
             {
-                //Корректировки от 25.03.2022
                 foreach (var voltages in i.ResidualVoltages)
                     if (voltages.UseEx)
                     {
@@ -710,12 +878,37 @@ namespace SCME.WpfControlLibrary.Pages
                         voltages.Value = voltages.ValueEx;
                     }
 
-                AddCellTdString($"Мин{i.Positition}", tr);
+                foreach (var voltagesIGBTOrMosfet in i.IGBTOrMosfetResidualVoltages)
+                    if (voltagesIGBTOrMosfet.UseEx)
+                    {
+
+                        voltagesIGBTOrMosfet.Min = voltagesIGBTOrMosfet.MinEx;
+                        voltagesIGBTOrMosfet.Max = voltagesIGBTOrMosfet.MaxEx;
+                        voltagesIGBTOrMosfet.Value = voltagesIGBTOrMosfet.ValueEx;
+                    }
+
+                //Объединение токов и напряжений в общий массив
+                for (int k = 0; k < i.IGBTOrMosfetInputAmperages.Count; k++)
+                    if (i.IGBTOrMosfetInputAmperages[k].Min != null)
+                    {
+                        i.IGBTOrMosfetInputVoltages[k] = i.IGBTOrMosfetInputAmperages[k];
+                        i.IGBTOrMosfetInputVoltages[k].IsAmp = true;
+                    }
+
+                AddCellTdString($"Мин. {i.Positition}", tr);
                 AddMinMaxHeader(values.SelectMany(m => m.LeakageCurrents).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.LeakageCurrents, tr, SelectorMinMaxValue.Min);
                 AddMinMaxHeader(values.SelectMany(m => m.InputAmperages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.InputAmperages, tr, SelectorMinMaxValue.Min);
                 AddMinMaxHeader(values.SelectMany(m => m.InputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.InputVoltages, tr, SelectorMinMaxValue.Min);
                 AddMinMaxHeader(values.SelectMany(m => m.ResidualVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.ResidualVoltages, tr, SelectorMinMaxValue.Min);
-                
+
+                AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetLeakageCurrents).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetLeakageCurrents, tr, SelectorMinMaxValue.Min);
+                AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetInputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetInputVoltages, tr, SelectorMinMaxValue.Min);
+
+                //AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetInputAmperages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetInputAmperages.Where(m => m.Min != null), tr, SelectorMinMaxValue.Min);
+                //AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetInputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetInputVoltages.Where(m => m.Min != null), tr, SelectorMinMaxValue.Min);
+
+                AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetResidualVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetResidualVoltages, tr, SelectorMinMaxValue.Min);
+
                 //AddMinMaxExHeader(values.SelectMany(m => m.ResidualVoltages).Where(m => m.MinEx != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.ResidualVoltages, tr, SelectorMinMaxValue.Min);
 
                 if (auxiliarPower != null)
@@ -740,13 +933,21 @@ namespace SCME.WpfControlLibrary.Pages
                 tbody.AppendChild(tr);
 
                 tr = _doc.CreateElement("tr");
-                AddCellTdString($"Макс{i.Positition}", tr);
+                AddCellTdString($"Макс. {i.Positition}", tr);
 
                 AddMinMaxHeader(values.SelectMany(m => m.LeakageCurrents).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.LeakageCurrents, tr, SelectorMinMaxValue.Max);
                 AddMinMaxHeader(values.SelectMany(m => m.InputAmperages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.InputAmperages, tr, SelectorMinMaxValue.Max);
                 AddMinMaxHeader(values.SelectMany(m => m.InputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.InputVoltages, tr, SelectorMinMaxValue.Max);
                 AddMinMaxHeader(values.SelectMany(m => m.ResidualVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.ResidualVoltages, tr, SelectorMinMaxValue.Max);
-                
+
+                AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetLeakageCurrents).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetLeakageCurrents, tr, SelectorMinMaxValue.Max);
+                AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetInputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetInputVoltages, tr, SelectorMinMaxValue.Max);
+
+                //AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetInputAmperages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetInputAmperages.Where(m => m.Min != null), tr, SelectorMinMaxValue.Max);
+                //AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetInputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetInputVoltages.Where(m => m.Min != null), tr, SelectorMinMaxValue.Max);
+
+                AddMinMaxHeader(values.SelectMany(m => m.IGBTOrMosfetResidualVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.IGBTOrMosfetResidualVoltages, tr, SelectorMinMaxValue.Max);
+
                 //AddMinMaxExHeader(values.SelectMany(m => m.ResidualVoltages).Where(m => m.MinEx != null).OrderBy(m => m.Index).GroupBy(m => m.Index).Count(), i.ResidualVoltages, tr, SelectorMinMaxValue.Max);
 
                 if (auxiliarPower != null)
@@ -775,22 +976,33 @@ namespace SCME.WpfControlLibrary.Pages
             AddCellThString("Номер", tr);
             AddCellThString("Канал", tr);
 
-
-            foreach(var i in values.SelectMany(m => m.LeakageCurrents).Where(m=> m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
+            foreach (var i in values.SelectMany(m => m.LeakageCurrents).Where(m=> m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
                 AddCellThString($"Ток утечки {i.Key}, мА", tr);
-
             foreach (var i in values.SelectMany(m => m.InputAmperages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
                 AddCellThString($"Ток входа {i.Key}, мА", tr);
-
             foreach (var i in values.SelectMany(m => m.InputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
                 AddCellThString($"Напряжение входа {i.Key}, В", tr);
-
-            //Корректировки от 25.03.2022
             foreach (var i in values.SelectMany(m => m.ResidualVoltages).Where(m => m.Min != null && !m.UseEx).OrderBy(m => m.Index).GroupBy(m => m.Index))
                 AddCellThString($"Выходное ост. напр. {i.Key}, В", tr);
-
             foreach (var i in values.SelectMany(m => m.ResidualVoltages).Where(m => m.MinEx != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
                 AddCellThString($"Сопр. в откр. сост. {i.Key}, Ом", tr);
+
+            foreach (var i in values.SelectMany(m => m.IGBTOrMosfetLeakageCurrents).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
+                AddCellThString($"Нач. ток стока {i.Key}, мА", tr);
+
+            //foreach (var i in values.SelectMany(m => m.IGBTOrMosfetInputAmperages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
+            //    AddCellThString($"Ток утечки з-и {i.Key}, мА", tr);
+
+            foreach (var i in values.SelectMany(m => m.IGBTOrMosfetInputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
+                AddCellThString(i.First().IsAmp ? $"Ток утечки з-и {i.Key}, мА" : $"Порог. напр. з-и {i.Key}, В", tr);
+            
+            //foreach (var i in values.SelectMany(m => m.IGBTOrMosfetInputVoltages).Where(m => m.Min != null && !m.IsAmp).OrderBy(m => m.Index).GroupBy(m => m.Index))
+            //    AddCellThString($"Порог. напр. з-и {i.Key}, В", tr);
+            
+            foreach (var i in values.SelectMany(m => m.IGBTOrMosfetResidualVoltages).Where(m => m.Min != null && !m.UseEx).OrderBy(m => m.Index).GroupBy(m => m.Index))
+                AddCellThString($"Пад. напр. на оп. диоде {i.Key}, В", tr);
+            foreach (var i in values.SelectMany(m => m.IGBTOrMosfetResidualVoltages).Where(m => m.MinEx != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
+                AddCellThString($"Сопр. сток-исток {i.Key}, Ом", tr);
 
             if (auxiliarPower?.AuxiliaryCurrentPowerSupplyMin1 != null)
                 AddCellThString($"Ток вспом. пит. 1", tr);
@@ -820,7 +1032,33 @@ namespace SCME.WpfControlLibrary.Pages
                     if (type.TestParametersType == TestParametersType.AuxiliaryPower)
                         th.InnerHtml = type.Name;
                     else
-                        th.InnerHtml = $"{type.Name} {t.Index}";
+                    {
+                        string test = type.Name;
+
+                        //Ток стока
+                        if (type.TestParametersType == TestParametersType.OutputLeakageCurrent)
+                            test = t.IsIGBTOrMosfet ? "Нач. ток стока" : type.Name;
+                        if (type.TestParametersType == TestParametersType.OutputResidualVoltage)
+                        {
+                            //Сопр. канала сток-исток
+                            if (((SCME.Types.OutputResidualVoltage.TestParameters)t).OpenState)
+                                test = t.IsIGBTOrMosfet ? "Сопротивление канала сток-исток" : "Сопротивление в открытом состоянии";
+                            //Падение напряжения на оппоз. диоде
+                            else
+                                test = t.IsIGBTOrMosfet ? "Падение напряжения на оппоз. диоде" : type.Name;
+                        }
+                        //Параметры затвора-истока
+                        if (type.TestParametersType == TestParametersType.InputOptions)
+                        {
+                            //Ток утечки затвор-исток
+                            if (((SCME.Types.InputOptions.TestParameters)t).ShowVoltage)
+                                test = t.IsIGBTOrMosfet ? "Ток утечки затвор-исток" : "Ток входа";
+                            else
+                                test = t.IsIGBTOrMosfet ? "Пороговое напряжение затвор-исток" : "Напряжение входа";
+                        }
+
+                        th.InnerHtml = $"{test} {t.Index}";
+                    }
                     tr.AppendChild(th);
 
                     tbody.AppendChild(AddNumberPositions(j.ToArray()));
@@ -830,8 +1068,12 @@ namespace SCME.WpfControlLibrary.Pages
                         case SCME.Types.InputOptions.TestParameters ioType:
                             var io = j.Cast<SCME.Types.InputOptions.TestParameters>();
                             tbody.AppendChild(AddLineValues("Тип управления:", io.Select(m => TestTypeEnumDictionary.GetTypeManagementToString()[m.TypeManagement])));
-                            tbody.AppendChild(AddLineValues2(io.Select(m => m.ShowVoltage ? "Напряжение управления, В:" : "Ток управления, мА:"),
+                            if (!io.First().IsIGBTOrMosfet)
+                                tbody.AppendChild(AddLineValues2(io.Select(m => m.ShowVoltage ? "Напряжение управления, В:" : "Ток управления, мА:"),
                                 io.Select(m => m.ShowVoltage ? m.ControlVoltage.ToString() : m.ControlCurrent.ToString())));
+                            else
+                                tbody.AppendChild(AddLineValues2(io.Select(m => m.ShowVoltage ? "Напряжение затвора, В:" : "Ток стока-истока, мА:"),
+                                    io.Select(m => m.ShowVoltage ? m.ControlVoltage.ToString() : m.ControlCurrent.ToString())));
                             if (io.First().ShowAuxiliaryVoltagePowerSupply1)
                                 tbody.AppendChild(AddLineValues("Напряжение вспом. пит. 1, В:", io.Select(m => m.AuxiliaryVoltagePowerSupply1.ToString())));
                             if (io.First().ShowAuxiliaryVoltagePowerSupply2)
@@ -866,7 +1108,7 @@ namespace SCME.WpfControlLibrary.Pages
                                 lc.Select(m => m.ShowVoltage ? m.ControlVoltage.ToString() : m.ControlCurrent.ToString())));
                             tbody.AppendChild(AddLineValues2(lc.Select(m => m.ShowVoltage ? "Ограничение по току управления, мА:" : "Ограничение по напр. управления, В"),
                                 lc.Select(m => m.ShowVoltage ? m.ControlCurrentMaximum.ToString() : m.ControlVoltageMaximum.ToString())));
-                            tbody.AppendChild(AddLineValues("Тип ком. напр. при измер. утечки:.:", lc.Select(m =>
+                            tbody.AppendChild(AddLineValues("Тип ком. напр. при измер. утечки:", lc.Select(m =>
                             TestTypeEnumDictionary.GetApplicationPolarityConstantSwitchingVoltage().ToDictionary(n => n.Value, n => n.Key)[m.ApplicationPolarityConstantSwitchingVoltage])));
                             tbody.AppendChild(AddLineValues("Комм. напряжение, В", lc.Select(m => m.SwitchedVoltage.ToString())));
                             //tbody.AppendChild(AddLineValues("Полярность прил. пост. ком. напр.:", lc.Select(m =>

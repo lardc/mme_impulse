@@ -155,6 +155,11 @@ namespace SCME.WpfControlLibrary.DataProviders
                 new TestParameterTypeMeasurement(TestParametersType.OutputLeakageCurrent, typeof(Types.OutputLeakageCurrent.TestParameters), "Ток утечки на выходе"),
                 new TestParameterTypeMeasurement(TestParametersType.OutputResidualVoltage, typeof(Types.OutputResidualVoltage.TestParameters), "Выходное остаточное напряжение"),
                 new TestParameterTypeMeasurement(TestParametersType.InputOptions, typeof(Types.InputOptions.TestParameters), "Параметры входа"),
+
+                new TestParameterTypeMeasurement(TestParametersType.OutputLeakageCurrent, typeof(Types.Gate.TestParameters), "Начальный ток стока"),
+                new TestParameterTypeMeasurement(TestParametersType.OutputResidualVoltage, typeof(Types.VTM.TestParameters), "Падение напряжения на оппоз. диоде"),
+                new TestParameterTypeMeasurement(TestParametersType.InputOptions, typeof(Types.BVT.TestParameters), "Параметры затвора-истока"),
+
                 /*new TestParameter(TestParametersType.ProhibitionVoltage, typeof(Types.ProhibitionVoltage.TestParameters), "Напряжение запрета")*/
             };
         }

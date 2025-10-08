@@ -26,6 +26,10 @@ namespace SCME.Types
                     new TestParameterTypeMeasurement(TestParametersType.OutputLeakageCurrent, typeof(Types.OutputLeakageCurrent.TestParameters), "Ток утечки на выходе"),
                     new TestParameterTypeMeasurement(TestParametersType.OutputResidualVoltage, typeof(Types.OutputResidualVoltage.TestParameters), "Выходное остаточное напряжение"),
                     new TestParameterTypeMeasurement(TestParametersType.InputOptions, typeof(Types.InputOptions.TestParameters), "Параметры входа"),
+
+                    new TestParameterTypeMeasurement(TestParametersType.OutputLeakageCurrent, typeof(Types.Gate.TestParameters), "Начальный ток стока"),
+                    new TestParameterTypeMeasurement(TestParametersType.OutputResidualVoltage, typeof(Types.VTM.TestParameters), "Падение напряжения на оппоз. диоде"),
+                    new TestParameterTypeMeasurement(TestParametersType.InputOptions, typeof(Types.BVT.TestParameters), "Параметры затвора-истока"),
                 };
 
         public static List<TestParameterTypeMeasurement> GetAllList() =>
@@ -34,6 +38,11 @@ namespace SCME.Types
                     new TestParameterTypeMeasurement(TestParametersType.OutputLeakageCurrent, typeof(Types.OutputLeakageCurrent.TestParameters), "Ток утечки на выходе"),
                     new TestParameterTypeMeasurement(TestParametersType.OutputResidualVoltage, typeof(Types.OutputResidualVoltage.TestParameters), "Выходное остаточное напряжение"),
                     new TestParameterTypeMeasurement(TestParametersType.InputOptions, typeof(Types.InputOptions.TestParameters), "Параметры входа"),
+
+                    new TestParameterTypeMeasurement(TestParametersType.OutputLeakageCurrent, typeof(Types.Gate.TestParameters), "Начальный ток стока"),
+                    new TestParameterTypeMeasurement(TestParametersType.OutputResidualVoltage, typeof(Types.VTM.TestParameters), "Падение напряжения на оппоз. диоде"),
+                    new TestParameterTypeMeasurement(TestParametersType.InputOptions, typeof(Types.BVT.TestParameters), "Параметры затвора-истока"),
+
                     new TestParameterTypeMeasurement(TestParametersType.AuxiliaryPower, typeof(Types.AuxiliaryPower.TestParameters), "Вспомогательное питание")
               };
 

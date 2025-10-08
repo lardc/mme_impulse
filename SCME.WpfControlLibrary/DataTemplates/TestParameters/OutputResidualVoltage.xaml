@@ -53,10 +53,29 @@
         </MultiBinding>
         </CheckBox.Visibility>
         <CheckBox.Content>
-        <Label HorizontalAlignment="Left" >
-            <TextBlock TextAlignment="Right">
-                Измерение сопротивления<LineBreak/> в открытом состоянии
-            </TextBlock>
+            <Label HorizontalAlignment="Left"  TextElement.Foreground="Black">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <TextBlock TextAlignment="Right">
+                                    Измерение сопротивления<LineBreak/> в открытом состоянии
+                                </TextBlock>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <TextBlock TextAlignment="Right">
+        Измерение сопротивления<LineBreak/> канала сток-исток
+                                        </TextBlock>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
         </Label>
         </CheckBox.Content>
     </CheckBox>
@@ -79,7 +98,7 @@
 
     <Label Grid.Column="0" Grid.Row="5" Visibility="{Binding ShowAuxiliaryCurrentPowerSupplyMax1, Converter={StaticResource B2V}}">
         <TextBlock>
-            Ограничение по току <LineBreak/>вспом. питания1, мА
+            Ограничение по току <LineBreak/>вспом. питания 1, мА
         </TextBlock>
     </Label>
     <customControls:NumericUpDown Grid.Column="1" Grid.Row="5"  Visibility="{Binding ShowAuxiliaryCurrentPowerSupplyMax1, Converter={StaticResource B2V}}" Value="{Binding AuxiliaryCurrentPowerSupplyMaximum1, Converter={StaticResource DML}}" 
@@ -87,7 +106,7 @@
 
     <Label Grid.Column="3" Grid.Row="5" Visibility="{Binding ShowAuxiliaryCurrentPowerSupplyMax2, Converter={StaticResource B2V}}">
         <TextBlock>
-             Ограничение по току <LineBreak/>вспом. питания2, мА
+             Ограничение по току <LineBreak/>вспом. питания 2, мА
         </TextBlock>
     </Label>
     <customControls:NumericUpDown Grid.Column="4" Grid.Row="5"  Visibility="{Binding ShowAuxiliaryCurrentPowerSupplyMax2, Converter={StaticResource B2V}}" Value="{Binding AuxiliaryCurrentPowerSupplyMaximum2, Converter={StaticResource DML}}" 
@@ -169,35 +188,111 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="0" Visibility="{Binding OpenState, Converter={StaticResource B2VI}}">
-            <TextBlock>
+        <Label Grid.Column="0" Grid.Row="0" Visibility="{Binding OpenState, Converter={StaticResource B2VI}}" TextElement.FontSize="22"  TextElement.Foreground="Black">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock TextAlignment="Right">
             Выходное остаточное<LineBreak/>напряжение мин., В
-            </TextBlock>
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock >
+                                        Падение напряжения<LineBreak/> на оп. диоде мин., В
+                                    </TextBlock>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
         </Label>
         <customControls:NumericUpDown Grid.Column="1" Grid.Row="0" Visibility="{Binding OpenState, Converter={StaticResource B2VI}}"  Value="{Binding OutputResidualVoltageMinimum, Converter={StaticResource DML}}" 
                                       Minimum="{Binding OutputResidualVoltageMinimumMin}" Maximum="{Binding OutputResidualVoltageMinimumMax}"/>
 
-        <Label  Grid.Column="3" Grid.Row="0" Visibility="{Binding OpenState, Converter={StaticResource B2VI}}">
-            <TextBlock>
-            Выходное остаточное<LineBreak/>напряжение макс., В
-            </TextBlock>
+        <Label  Grid.Column="3" Grid.Row="0" Visibility="{Binding OpenState, Converter={StaticResource B2VI}}" TextElement.FontSize="22"  TextElement.Foreground="Black">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock TextAlignment="Right">
+Выходное остаточное<LineBreak/>напряжение макс., В
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock >
+Падение напряжения<LineBreak/> на оп. диоде макс., В
+                                    </TextBlock>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
         </Label>
         <customControls:NumericUpDown Grid.Column="4" Grid.Row="0"  Visibility="{Binding OpenState, Converter={StaticResource B2VI}}"  Value="{Binding OutputResidualVoltageMaximum, Converter={StaticResource DML}}" 
                                       Minimum="{Binding OutputResidualVoltageMaximumMin}" Maximum="{Binding OutputResidualVoltageMaximumMax}"/>
 
-        
-            <Label Grid.Column="0" Grid.Row="1"  Visibility="{Binding OpenState, Converter={StaticResource B2V}}">
-                <TextBlock>
+
+        <Label Grid.Column="0" Grid.Row="1"  Visibility="{Binding OpenState, Converter={StaticResource B2V}}" TextElement.FontSize="22"  TextElement.Foreground="Black">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock TextAlignment="Right">
                     Сопр. в открытом <LineBreak/>состоянии мин., Ом
-                </TextBlock>
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock TextAlignment="Right">
+                    Сопр. канала <LineBreak/>сток-исток мин., Ом
+                                    </TextBlock>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
             </Label>
         <customControls:NumericUpDown Grid.Column="1" Grid.Row="1" Visibility="{Binding OpenState, Converter={StaticResource B2V}}"  Value="{Binding OpenResistanceMinimum, Converter={StaticResource DML}}"   />
-    
 
-        <Label Grid.Column="3" Grid.Row="1"  Visibility="{Binding OpenState, Converter={StaticResource B2V}}">
-            <TextBlock>
-                Сопр. в открытом <LineBreak/>состоянии макс., Ом
-            </TextBlock>
+
+        <Label Grid.Column="3" Grid.Row="1"  Visibility="{Binding OpenState, Converter={StaticResource B2V}}" TextElement.FontSize="22"  TextElement.Foreground="Black">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock TextAlignment="Right">
+        Сопр. в открытом <LineBreak/>состоянии макс., Ом
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock TextAlignment="Right">
+        Сопр. канала <LineBreak/>сток-исток макс., Ом
+                                    </TextBlock>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
         </Label>
         <customControls:NumericUpDown Grid.Column="4" Grid.Row="1" Visibility="{Binding OpenState, Converter={StaticResource B2V}}"  Value="{Binding OpenResistanceMaximum, Converter={StaticResource DML}}"   />
         
@@ -217,10 +312,29 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Label  Grid.Column="0" Grid.Row="0">
-            <TextBlock>
+        <Label  Grid.Column="0" Grid.Row="0" TextElement.FontSize="22"  TextElement.Foreground="Black">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock TextAlignment="Right">
             Ограничение по<LineBreak/>остаточному<LineBreak/>напряжению, В
-            </TextBlock>
+                            </TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock TextAlignment="Right">
+            Ограничение по<LineBreak/>падению<LineBreak/>напряжения на оппоз. диоде, В
+                                    </TextBlock>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
         </Label>
         <customControls:NumericUpDown Grid.Column="1" Grid.Row="0"    Value="{Binding OutputResidualVoltageMaximum, Converter={StaticResource DML}}" />
 

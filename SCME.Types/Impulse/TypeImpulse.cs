@@ -59,6 +59,9 @@ namespace SCME.Types.SSRTU
 
         [DataMember]
         public double OpenResistance { get; set; }
+
+        [DataMember]
+        public bool IsIGBTOrMosfet { get; set; }
     }
 
     public class CommonResult

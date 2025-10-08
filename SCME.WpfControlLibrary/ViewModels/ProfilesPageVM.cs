@@ -89,7 +89,8 @@ namespace SCME.WpfControlLibrary.ViewModels
 
         public TestParametersType SelectedTestParametersType { get; set; } = TestParametersType.OutputLeakageCurrent;
 
-      
+
+        public string SelectedTest { get; set; }
 
 
 

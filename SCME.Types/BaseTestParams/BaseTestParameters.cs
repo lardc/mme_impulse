@@ -136,6 +136,9 @@ namespace SCME.Types.BaseTestParams
         public TestParametersType TestParametersType { get; set; }
 
         [DataMember]
+        public bool IsIGBTOrMosfet { get; set; }
+
+        [DataMember]
         public int Order { get; set; }
         
         [DataMember] public bool IsEnabled { get; set; }

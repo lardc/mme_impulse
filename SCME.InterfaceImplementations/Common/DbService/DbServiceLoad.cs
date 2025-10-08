@@ -514,6 +514,10 @@ namespace SCME.InterfaceImplementations.Common.DbService
                     case "Im_AuxiliaryCurrentPowerSupplyMax2":
                         testParams.AuxiliaryCurrentPowerSupplyMaximum2 = Double.ParseInternationally(result.Value.ToString());
                         break;
+
+                    case "Im_IsMosfet":
+                        testParams.IsIGBTOrMosfet = bool.Parse(result.Value.ToString());
+                        break;
                 }
             }
 
@@ -594,6 +598,10 @@ namespace SCME.InterfaceImplementations.Common.DbService
 
                     case "Im_AuxiliaryCurrentPowerSupplyMax2":
                         testParams.AuxiliaryCurrentPowerSupplyMaximum2 = Double.ParseInternationally(result.Value.ToString());
+                        break;
+
+                    case "Im_IsMosfet":
+                        testParams.IsIGBTOrMosfet = bool.Parse(result.Value.ToString());
                         break;
 
                 }
@@ -686,6 +694,11 @@ namespace SCME.InterfaceImplementations.Common.DbService
                     case "Im_AuxiliaryCurrentPowerSupplyMax2":
                         testParams.AuxiliaryCurrentPowerSupplyMaximum2 = Double.ParseInternationally(result.Value.ToString());
                         break;
+
+                    case "Im_IsMosfet":
+                        testParams.IsIGBTOrMosfet = bool.Parse(result.Value.ToString());
+                        break;
+
                 }
             }
 
