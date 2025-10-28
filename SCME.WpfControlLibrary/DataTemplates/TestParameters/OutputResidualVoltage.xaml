@@ -68,7 +68,7 @@
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <TextBlock TextAlignment="Right">
-        Измерение сопротивления<LineBreak/> канала сток-исток
+        Измерение сопротивления<LineBreak/>канала сток-исток
                                         </TextBlock>
                                     </Setter.Value>
                                 </Setter>
@@ -193,7 +193,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
             Выходное остаточное<LineBreak/>напряжение мин., В
                             </TextBlock>
                         </Setter.Value>
@@ -220,7 +220,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
 Выходное остаточное<LineBreak/>напряжение макс., В
                             </TextBlock>
                         </Setter.Value>
@@ -248,7 +248,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
                     Сопр. в открытом <LineBreak/>состоянии мин., Ом
                             </TextBlock>
                         </Setter.Value>
@@ -257,7 +257,7 @@
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <TextBlock TextAlignment="Right">
+                                    <TextBlock TextAlignment="Left">
                     Сопр. канала <LineBreak/>сток-исток мин., Ом
                                     </TextBlock>
                                 </Setter.Value>
@@ -275,7 +275,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
         Сопр. в открытом <LineBreak/>состоянии макс., Ом
                             </TextBlock>
                         </Setter.Value>
@@ -284,7 +284,7 @@
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <TextBlock TextAlignment="Right">
+                                    <TextBlock TextAlignment="Left">
         Сопр. канала <LineBreak/>сток-исток макс., Ом
                                     </TextBlock>
                                 </Setter.Value>
@@ -317,7 +317,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
             Ограничение по<LineBreak/>остаточному<LineBreak/>напряжению, В
                             </TextBlock>
                         </Setter.Value>
@@ -326,7 +326,7 @@
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <TextBlock TextAlignment="Right">
+                                    <TextBlock TextAlignment="Left">
             Ограничение по<LineBreak/>падению<LineBreak/>напряжения на оппоз. диоде, В
                                     </TextBlock>
                                 </Setter.Value>

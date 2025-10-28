@@ -27,9 +27,9 @@ namespace SCME.Types.InputOptions
 
 
         public double InputCurrentMinimumMin => 0;
-        public double InputCurrentMinimumMax => 100;
+        public double InputCurrentMinimumMax => IsIGBTOrMosfet ? 10 : 100;
         public double InputCurrentMaximumMin => 0.01;
-        public double InputCurrentMaximumMax => 100;
+        public double InputCurrentMaximumMax => IsIGBTOrMosfet ? 10 : 100;
 
 
         public double AuxiliaryVoltagePowerSupply1Min => 0.05;

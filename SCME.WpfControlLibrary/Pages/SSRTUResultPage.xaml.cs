@@ -994,7 +994,7 @@ namespace SCME.WpfControlLibrary.Pages
             //    AddCellThString($"Ток утечки з-и {i.Key}, мА", tr);
 
             foreach (var i in values.SelectMany(m => m.IGBTOrMosfetInputVoltages).Where(m => m.Min != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
-                AddCellThString(i.First().IsAmp ? $"Ток утечки з-и {i.Key}, мА" : $"Порог. напр. з-и {i.Key}, В", tr);
+                AddCellThString(i.First().IsAmp ? $"Ток утечки з-и {i.Key}, нА" : $"Порог. напр. з-и {i.Key}, В", tr);
             
             //foreach (var i in values.SelectMany(m => m.IGBTOrMosfetInputVoltages).Where(m => m.Min != null && !m.IsAmp).OrderBy(m => m.Index).GroupBy(m => m.Index))
             //    AddCellThString($"Порог. напр. з-и {i.Key}, В", tr);

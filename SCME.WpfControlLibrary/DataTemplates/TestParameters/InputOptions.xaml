@@ -120,7 +120,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
 Ток входа мин, мА
                             </TextBlock>
                         </Setter.Value>
@@ -129,8 +129,8 @@
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <TextBlock TextAlignment="Right">
-Ток утечки мин, мА
+                                    <TextBlock TextAlignment="Left">
+Ток утечки <LineBreak/>затвор-исток мин, нА
                                     </TextBlock>
                                 </Setter.Value>
                             </Setter>
@@ -147,7 +147,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
 Ток входа макс, мА
                             </TextBlock>
                         </Setter.Value>
@@ -156,8 +156,8 @@
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <TextBlock TextAlignment="Right">
-Ток утечки макс, мА
+                                    <TextBlock TextAlignment="Left">
+Ток утечки <LineBreak/>затвор-исток макс, нА
                                     </TextBlock>
                                 </Setter.Value>
                             </Setter>
@@ -175,7 +175,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
 Напряжение <LineBreak/>входа мин, В
                             </TextBlock>
                         </Setter.Value>
@@ -184,8 +184,8 @@
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <TextBlock TextAlignment="Right">
-Напряжение <LineBreak/>затвор-исток мин, В
+                                    <TextBlock TextAlignment="Left">
+Порог. напряжение <LineBreak/>затвор-исток мин, В
                                     </TextBlock>
                                 </Setter.Value>
                             </Setter>
@@ -202,7 +202,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
 Напряжение <LineBreak/>входа макс, В
                             </TextBlock>
                         </Setter.Value>
@@ -211,8 +211,8 @@
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <TextBlock TextAlignment="Right">
-Напряжение <LineBreak/>затвор-исток макс, В
+                                    <TextBlock TextAlignment="Left">
+Порог. напряжение <LineBreak/>затвор-исток макс, В
                                     </TextBlock>
                                 </Setter.Value>
                             </Setter>
@@ -274,7 +274,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
                 Ограничение по<LineBreak/>току входа, мА
                             </TextBlock>
                         </Setter.Value>
@@ -283,7 +283,7 @@
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <TextBlock TextAlignment="Right">
+                                    <TextBlock TextAlignment="Left">
                 Ограничение по<LineBreak/>току утечки, мА
                                     </TextBlock>
                                 </Setter.Value>
@@ -300,7 +300,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
                 Ограничение по<LineBreak/>напряжению входа, В
                             </TextBlock>
                         </Setter.Value>
@@ -309,8 +309,8 @@
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <TextBlock TextAlignment="Right">
-                Ограничение по<LineBreak/>напряжению затвор-исток, В
+                                    <TextBlock TextAlignment="Left">
+                Ограничение по порог.<LineBreak/>напряжению затвор-исток, В
                                     </TextBlock>
                                 </Setter.Value>
                             </Setter>

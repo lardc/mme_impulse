@@ -15,9 +15,9 @@
             <converters:SSRTUResultConverter x:Key="DN2S"/>
             <converters:BoolToBrush x:Key="B2B" NullBrush="Transparent" TrueBrush="{StaticResource xGreen1}" FalseBrush="{StaticResource xRed1}"/>
             <Style TargetType="Border">
-                <Setter Property="Margin" Value="10,0,0,0"/>
-                <Setter Property="Height" Value="64"/>
-                <Setter Property="Width" Value="114"/>
+                <Setter Property="Margin" Value="10,0,0,0" />
+                <Setter Property="Height" Value="40" />
+                <Setter Property="Width" Value="70" />
             </Style>
         </ResourceDictionary>
     </Grid.Resources>
@@ -40,26 +40,26 @@
     <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center">
         Вспомогательное питание
     </TextBlock>
-    
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Grid.Column="0" Grid.Row="6"  >
+
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Grid.Column="0" Grid.Row="6"  FontSize="18" >
         Ток вспом. пит. 1
     </TextBlock>
     <Border Grid.Column="1" Grid.Row="6"  Background="{Binding AuxiliaryCurrentPowerSupply1IsOk, Converter={StaticResource B2B}}" >
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding AuxiliaryCurrentPowerSupply1, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding AuxiliaryCurrentPowerSupply1, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18"/>
     </Border>
 
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Grid.Column="0" Grid.Row="7" >
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Grid.Column="0" Grid.Row="7" FontSize="18" >
         Ток вспом. пит. 2
     </TextBlock>
     <Border Grid.Column="1" Grid.Row="7"  Background="{Binding AuxiliaryCurrentPowerSupply2IsOk, Converter={StaticResource B2B}}" >
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding AuxiliaryCurrentPowerSupply2, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding AuxiliaryCurrentPowerSupply2, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18"/>
     </Border>
 
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Grid.Column="0" Grid.Row="8" >
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Grid.Column="0" Grid.Row="8" FontSize="18" >
         Код ошибки
     </TextBlock>
     <Border Grid.Column="1" Grid.Row="8" Background="{Binding HaveError, Converter={StaticResource B2B}}"  >
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ErrorCode}" HorizontalAlignment="Center"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ErrorCode}" HorizontalAlignment="Center" FontSize="18"/>
     </Border>
 
 </Grid>

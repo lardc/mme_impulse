@@ -139,13 +139,19 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" TextElement.Foreground="Black">
+        <Label Grid.Column="0" TextElement.FontSize="22" TextElement.Foreground="Black">
             <Label.Style>
                 <Style TargetType="Label">
                     <Setter Property="Content" Value="Ток утечки мин, мА"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
-                            <Setter Property="Content" Value="Нач. ток стока мин, мА"/>
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock TextAlignment="Left">
+Начальный<LineBreak/>ток стока мин, мА
+                                    </TextBlock>
+                                </Setter.Value>
+                            </Setter>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -154,13 +160,19 @@
         <customControls:NumericUpDown Grid.Column="1"   Value="{Binding LeakageCurrentMinimum, Converter={StaticResource DML}}" 
                                       Minimum="{Binding LeakageCurrentMinimumMin}" Maximum="{Binding LeakageCurrentMinimumMax}"/>
 
-        <Label Grid.Column="3" TextElement.Foreground="Black">
+        <Label Grid.Column="3" TextElement.FontSize="22" TextElement.Foreground="Black">
             <Label.Style>
                 <Style TargetType="Label">
                     <Setter Property="Content" Value="Ток утечки макс, мА"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
-                            <Setter Property="Content" Value="Нач. ток стока макс, мА"/>
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock TextAlignment="Left">
+Начальный<LineBreak/>ток стока макс, мА
+                                    </TextBlock>
+                                </Setter.Value>
+                            </Setter>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -188,7 +200,7 @@
                 <Style TargetType="Label">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock TextAlignment="Right">
+                            <TextBlock TextAlignment="Left">
                 Ограничение по<LineBreak/>току утечки, мА
                             </TextBlock>
                         </Setter.Value>
@@ -197,7 +209,7 @@
                         <DataTrigger Binding="{Binding IsIGBTOrMosfet}" Value="True">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <TextBlock TextAlignment="Right">
+                                    <TextBlock TextAlignment="Left">
 Ограничение по нач.<LineBreak/>току стока, мА
                                     </TextBlock>
                                 </Setter.Value>

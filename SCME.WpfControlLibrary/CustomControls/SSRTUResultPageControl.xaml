@@ -16,8 +16,8 @@
             <converters:BoolToBrush x:Key="B2B" NullBrush="Transparent" TrueBrush="{StaticResource xGreen1}" FalseBrush="{StaticResource xRed1}" />
             <Style TargetType="Border">
                 <Setter Property="Margin" Value="10,0,0,0" />
-                <Setter Property="Height" Value="64" />
-                <Setter Property="Width" Value="114" />
+                <Setter Property="Height" Value="40" />
+                <Setter Property="Width" Value="70" />
             </Style>
         </ResourceDictionary>
     </Grid.Resources>
@@ -54,89 +54,89 @@
         Канал <Run Text="{Binding Positition}" />
     </TextBlock>
 
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки 1, мА" Grid.Column="0" Grid.Row="1"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки 1, мА" Grid.Column="0" Grid.Row="1" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="1" Background="{Binding LeakageCurrent1.IsOk, Converter={StaticResource B2B}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding LeakageCurrent1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding LeakageCurrent1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки 2, мА" Grid.Column="0" Grid.Row="2"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки 2, мА" Grid.Column="0" Grid.Row="2" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="2" Background="{Binding LeakageCurrent2.IsOk, Converter={StaticResource B2B}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding LeakageCurrent2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding LeakageCurrent2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки 3, мА" Grid.Column="0" Grid.Row="3"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки 3, мА" Grid.Column="0" Grid.Row="3" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="3" Background="{Binding LeakageCurrent3.IsOk, Converter={StaticResource B2B}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding LeakageCurrent3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding LeakageCurrent3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки 4, мА" Grid.Column="0" Grid.Row="4"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки 4, мА" Grid.Column="0" Grid.Row="4" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="4" Background="{Binding LeakageCurrent4.IsOk, Converter={StaticResource B2B}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding LeakageCurrent4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding LeakageCurrent4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
 
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Вых. ост. напр. 1, В" Grid.Column="0" Grid.Row="5"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Вых. ост. напр. 1, В" Grid.Column="0" Grid.Row="5" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="5" Background="{Binding ResidualVoltage1.IsOk, Converter={StaticResource B2B}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Вых. ост. напр. 2, В" Grid.Column="0" Grid.Row="6"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Вых. ост. напр. 2, В" Grid.Column="0" Grid.Row="6" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="6" Background="{Binding ResidualVoltage2.IsOk, Converter={StaticResource B2B}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Вых. ост. напр. 3, В" Grid.Column="0" Grid.Row="7"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Вых. ост. напр. 3, В" Grid.Column="0" Grid.Row="7" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="7" Background="{Binding ResidualVoltage3.IsOk, Converter={StaticResource B2B}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Вых. ост. напр. 4, В" Grid.Column="0" Grid.Row="8"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Вых. ост. напр. 4, В" Grid.Column="0" Grid.Row="8" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="8" Background="{Binding ResidualVoltage4.IsOk, Converter={StaticResource B2B}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
 
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток входа 1, мА" Grid.Column="0" Grid.Row="9" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток входа 1, мА" Grid.Column="0" Grid.Row="9" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}" FontSize="18"/>
     <Border Grid.Column="2" Grid.Row="9" Background="{Binding InputAmperage1.IsOk, Converter={StaticResource B2B}}" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputAmperage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputAmperage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток входа 2, мА" Grid.Column="0" Grid.Row="10" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток входа 2, мА" Grid.Column="0" Grid.Row="10" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}" FontSize="18"/>
     <Border Grid.Column="2" Grid.Row="10" Background="{Binding InputAmperage2.IsOk, Converter={StaticResource B2B}}" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputAmperage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputAmperage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток входа 3, мА" Grid.Column="0" Grid.Row="11" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток входа 3, мА" Grid.Column="0" Grid.Row="11" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}" FontSize="18"/>
     <Border Grid.Column="2" Grid.Row="11" Background="{Binding InputAmperage3.IsOk, Converter={StaticResource B2B}}" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputAmperage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputAmperage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток входа 4, мА" Grid.Column="0" Grid.Row="12" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток входа 4, мА" Grid.Column="0" Grid.Row="12" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}" FontSize="18"/>
     <Border Grid.Column="2" Grid.Row="12" Background="{Binding InputAmperage4.IsOk, Converter={StaticResource B2B}}" Visibility="{Binding ShowInputAmperage, Converter={StaticResource B2V}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputAmperage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputAmperage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
 
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Напр. входа 1, В" Grid.Column="0" Grid.Row="13" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Напр. входа 1, В" Grid.Column="0" Grid.Row="13" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="13" Background="{Binding InputVoltage1.IsOk, Converter={StaticResource B2B}}" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputVoltage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputVoltage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Напр. входа 2, В" Grid.Column="0" Grid.Row="14" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Напр. входа 2, В" Grid.Column="0" Grid.Row="14" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="14" Background="{Binding InputVoltage2.IsOk, Converter={StaticResource B2B}}" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputVoltage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputVoltage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Напр. входа 3, В" Grid.Column="0" Grid.Row="15" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Напр. входа 3, В" Grid.Column="0" Grid.Row="15" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="15" Background="{Binding InputVoltage3.IsOk, Converter={StaticResource B2B}}" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputVoltage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputVoltage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Напр. входа 4, В" Grid.Column="0" Grid.Row="16" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Напр. входа 4, В" Grid.Column="0" Grid.Row="16" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="16" Background="{Binding InputVoltage4.IsOk, Converter={StaticResource B2B}}" Visibility="{Binding ShowInputVoltage, Converter={StaticResource B2V}}">
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputVoltage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding InputVoltage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
 
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. в откр. сост. 1, Ом" Grid.Column="0" Grid.Row="17"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. в откр. сост. 1, Ом" Grid.Column="0" Grid.Row="17" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="17" Background="{Binding ResidualVoltage1.IsOkEx, Converter={StaticResource B2B}}" >
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage1.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage1.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. в откр. сост. 2, Ом" Grid.Column="0" Grid.Row="18"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. в откр. сост. 2, Ом" Grid.Column="0" Grid.Row="18" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="18" Background="{Binding ResidualVoltage2.IsOkEx, Converter={StaticResource B2B}}" >
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage2.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage2.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. в откр. сост. 3, Ом" Grid.Column="0" Grid.Row="19"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. в откр. сост. 3, Ом" Grid.Column="0" Grid.Row="19" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="19" Background="{Binding ResidualVoltage3.IsOkEx, Converter={StaticResource B2B}}" >
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage3.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage3.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
-    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. в откр. сост. 4, Ом" Grid.Column="0" Grid.Row="20"/>
+    <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. в откр. сост. 4, Ом" Grid.Column="0" Grid.Row="20" FontSize="18"/>
     <Border Grid.Column="1" Grid.Row="20" Background="{Binding ResidualVoltage4.IsOkEx, Converter={StaticResource B2B}}" >
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage4.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding ResidualVoltage4.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
     </Border>
 
     <Grid Grid.ColumnSpan="2" Grid.Row="21">
@@ -167,45 +167,45 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Нач. ток стока 1, мА" Grid.Column="0" Grid.Row="1"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Нач. ток стока 1, мА" Grid.Column="0" Grid.Row="1" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="1" Background="{Binding IGBTOrMosfetLeakageCurrent1.IsOk, Converter={StaticResource B2B}}">
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetLeakageCurrent1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetLeakageCurrent1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Нач. ток стока 2, мА" Grid.Column="0" Grid.Row="2"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Нач. ток стока 2, мА" Grid.Column="0" Grid.Row="2" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="2" Background="{Binding IGBTOrMosfetLeakageCurrent2.IsOk, Converter={StaticResource B2B}}">
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetLeakageCurrent2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetLeakageCurrent2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Нач. ток стока 3, мА" Grid.Column="0" Grid.Row="3"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Нач. ток стока 3, мА" Grid.Column="0" Grid.Row="3" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="3" Background="{Binding IGBTOrMosfetLeakageCurrent3.IsOk, Converter={StaticResource B2B}}">
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetLeakageCurrent3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetLeakageCurrent3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Нач. ток стока 4, мА" Grid.Column="0" Grid.Row="4"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Нач. ток стока 4, мА" Grid.Column="0" Grid.Row="4" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="4" Background="{Binding IGBTOrMosfetLeakageCurrent4.IsOk, Converter={StaticResource B2B}}">
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetLeakageCurrent4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetLeakageCurrent4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
 
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 1, В" Grid.Column="0" Grid.Row="5"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 1, В" Grid.Column="0" Grid.Row="5" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="5" Background="{Binding IGBTOrMosfetResidualVoltage1.IsOk, Converter={StaticResource B2B}}">
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 2, В" Grid.Column="0" Grid.Row="6"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 2, В" Grid.Column="0" Grid.Row="6" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="6" Background="{Binding IGBTOrMosfetResidualVoltage2.IsOk, Converter={StaticResource B2B}}">
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 3, В" Grid.Column="0" Grid.Row="7"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 3, В" Grid.Column="0" Grid.Row="7" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="7" Background="{Binding IGBTOrMosfetResidualVoltage3.IsOk, Converter={StaticResource B2B}}">
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 4, В" Grid.Column="0" Grid.Row="8"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 4, В" Grid.Column="0" Grid.Row="8" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="8" Background="{Binding IGBTOrMosfetResidualVoltage4.IsOk, Converter={StaticResource B2B}}">
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
 
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки з-и 1, мА" Grid.Column="0" Grid.Row="9"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки з-и 1, нА" Grid.Column="0" Grid.Row="9" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="9">
             <Grid>
-                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputAmperage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
-                <Border x:Name="InputAmp1" BorderBrush="Black" BorderThickness="2" Margin="0,4">
+                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputAmperage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
+                <Border x:Name="InputAmp1" BorderBrush="Black" BorderThickness="2" Margin="0,2">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Setter Property="Visibility" Value="Visible"/>
@@ -216,15 +216,15 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualAmperage1}" Background="{StaticResource xGray2}" TextAlignment="Center" TextChanged="ValidatingTextBox_TextChanged"/>
+                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualAmperage1}" Background="{StaticResource xGray2}" TextAlignment="Center" FontSize="18" TextChanged="ValidatingTextBox_TextChanged"/>
                 </Border>
             </Grid>
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки з-и 2, мА" Grid.Column="0" Grid.Row="10"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки з-и 2, нА" Grid.Column="0" Grid.Row="10" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="10">
             <Grid>
-                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputAmperage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
-                <Border x:Name="InputAmp2" BorderBrush="Black" BorderThickness="2" Margin="0,4">
+                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputAmperage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
+                <Border x:Name="InputAmp2" BorderBrush="Black" BorderThickness="2" Margin="0,2">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Setter Property="Visibility" Value="Visible"/>
@@ -235,15 +235,15 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualAmperage2}" Background="{StaticResource xGray2}" TextAlignment="Center" TextChanged="ValidatingTextBox_TextChanged"/>
+                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualAmperage2}" Background="{StaticResource xGray2}" TextAlignment="Center" FontSize="18" TextChanged="ValidatingTextBox_TextChanged"/>
                 </Border>
             </Grid>
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки з-и 3, мА" Grid.Column="0" Grid.Row="11"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки з-и 3, нА" Grid.Column="0" Grid.Row="11" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="11">
             <Grid>
-                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputAmperage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
-                <Border x:Name="InputAmp3" BorderBrush="Black" BorderThickness="2" Margin="0,4">
+                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputAmperage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
+                <Border x:Name="InputAmp3" BorderBrush="Black" BorderThickness="2" Margin="0,2">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Setter Property="Visibility" Value="Visible"/>
@@ -254,15 +254,15 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualAmperage3}" Background="{StaticResource xGray2}" TextAlignment="Center" TextChanged="ValidatingTextBox_TextChanged"/>
+                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualAmperage3}" Background="{StaticResource xGray2}" TextAlignment="Center" FontSize="18" TextChanged="ValidatingTextBox_TextChanged"/>
                 </Border>
             </Grid>
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки з-и 4, мА" Grid.Column="0" Grid.Row="12"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Ток утечки з-и 4, нА" Grid.Column="0" Grid.Row="12" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="12">
             <Grid>
-                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputAmperage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
-                <Border x:Name="InputAmp4" BorderBrush="Black" BorderThickness="2" Margin="0,4">
+                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputAmperage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
+                <Border x:Name="InputAmp4" BorderBrush="Black" BorderThickness="2" Margin="0,2">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Setter Property="Visibility" Value="Visible"/>
@@ -273,16 +273,16 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualAmperage4}" Background="{StaticResource xGray2}" TextAlignment="Center" TextChanged="ValidatingTextBox_TextChanged"/>
+                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualAmperage4}" Background="{StaticResource xGray2}" TextAlignment="Center" FontSize="18" TextChanged="ValidatingTextBox_TextChanged"/>
                 </Border>
             </Grid>
         </Border>
 
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Порог. напр. з-и 1, В" Grid.Column="0" Grid.Row="13"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Порог. напр. з-и 1, В" Grid.Column="0" Grid.Row="13" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="13">
             <Grid>
-                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputVoltage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
-                <Border x:Name="InputVol1" BorderBrush="Black" BorderThickness="2" Margin="0,4">
+                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputVoltage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
+                <Border x:Name="InputVol1" BorderBrush="Black" BorderThickness="2" Margin="0,2">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Setter Property="Visibility" Value="Visible"/>
@@ -293,15 +293,15 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualVoltage1}" Background="{StaticResource xGray2}" TextAlignment="Center" TextChanged="ValidatingTextBox_TextChanged"/>
+                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualVoltage1}" Background="{StaticResource xGray2}" TextAlignment="Center" FontSize="18" TextChanged="ValidatingTextBox_TextChanged"/>
                 </Border>
             </Grid>
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Порог. напр. з-и 2, В" Grid.Column="0" Grid.Row="14"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Порог. напр. з-и 2, В" Grid.Column="0" Grid.Row="14" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="14">
             <Grid>
-                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputVoltage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
-                <Border x:Name="InputVol2" BorderBrush="Black" BorderThickness="2" Margin="0,4">
+                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputVoltage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
+                <Border x:Name="InputVol2" BorderBrush="Black" BorderThickness="2" Margin="0,2">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Setter Property="Visibility" Value="Visible"/>
@@ -312,15 +312,15 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualVoltage2}" Background="{StaticResource xGray2}" TextAlignment="Center" TextChanged="ValidatingTextBox_TextChanged"/>
+                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualVoltage2}" Background="{StaticResource xGray2}" TextAlignment="Center" FontSize="18" TextChanged="ValidatingTextBox_TextChanged"/>
                 </Border>
             </Grid>
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Порог. напр. з-и 3, В" Grid.Column="0" Grid.Row="15"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Порог. напр. з-и 3, В" Grid.Column="0" Grid.Row="15" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="15">
             <Grid>
-                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputVoltage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
-                <Border x:Name="InputVol3" BorderBrush="Black" BorderThickness="2" Margin="0,4">
+                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputVoltage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
+                <Border x:Name="InputVol3" BorderBrush="Black" BorderThickness="2" Margin="0,2">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Setter Property="Visibility" Value="Visible"/>
@@ -331,15 +331,15 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualVoltage3}" Background="{StaticResource xGray2}" TextAlignment="Center" TextChanged="ValidatingTextBox_TextChanged"/>
+                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualVoltage3}" Background="{StaticResource xGray2}" TextAlignment="Center" FontSize="18" TextChanged="ValidatingTextBox_TextChanged"/>
                 </Border>
             </Grid>
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Порог. напр. з-и 4, В" Grid.Column="0" Grid.Row="16"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Порог. напр. з-и 4, В" Grid.Column="0" Grid.Row="16" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="16">
             <Grid>
-                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputVoltage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
-                <Border x:Name="InputVol4" BorderBrush="Black" BorderThickness="2" Margin="0,4">
+                <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetInputVoltage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
+                <Border x:Name="InputVol4" BorderBrush="Black" BorderThickness="2" Margin="0,2">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Setter Property="Visibility" Value="Visible"/>
@@ -350,26 +350,26 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualVoltage4}" Background="{StaticResource xGray2}" TextAlignment="Center" TextChanged="ValidatingTextBox_TextChanged"/>
+                    <customControls:ValidatingTextBox Style="{StaticResource PlaceholderTextBox}" Text="{Binding ManualVoltage4}" Background="{StaticResource xGray2}" TextAlignment="Center" FontSize="18" TextChanged="ValidatingTextBox_TextChanged"/>
                 </Border>
             </Grid>
         </Border>
 
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. сток-исток 1, Ом" Grid.Column="0" Grid.Row="17"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. сток-исток 1, Ом" Grid.Column="0" Grid.Row="17" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="17" Background="{Binding IGBTOrMosfetResidualVoltage1.IsOkEx, Converter={StaticResource B2B}}" >
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage1.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage1.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. сток-исток 2, Ом" Grid.Column="0" Grid.Row="18"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. сток-исток 2, Ом" Grid.Column="0" Grid.Row="18" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="18" Background="{Binding IGBTOrMosfetResidualVoltage2.IsOkEx, Converter={StaticResource B2B}}" >
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage2.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage2.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. сток-исток 3, Ом" Grid.Column="0" Grid.Row="19"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. сток-исток 3, Ом" Grid.Column="0" Grid.Row="19" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="19" Background="{Binding IGBTOrMosfetResidualVoltage3.IsOkEx, Converter={StaticResource B2B}}" >
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage3.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage3.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. сток-исток 4, Ом" Grid.Column="0" Grid.Row="20"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Сопр. сток-исток 4, Ом" Grid.Column="0" Grid.Row="20" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="20" Background="{Binding IGBTOrMosfetResidualVoltage4.IsOkEx, Converter={StaticResource B2B}}" >
-            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage4.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" />
+            <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage4.ValueEx, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
     </Grid>
 </Grid>

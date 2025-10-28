@@ -7,7 +7,6 @@
          GotFocus="TextBox_GotFocus" PreviewMouseDown="ValidatingTextBox_OnPreviewMouseDown"
          LostKeyboardFocus="TextBox_LostFocus"
          FontFamily="Segoe UI"
-         
          FontWeight="ExtraLight" >
 
 
