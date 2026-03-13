@@ -203,7 +203,7 @@
                             <Setter Property="Content">
                                 <Setter.Value>
                                     <TextBlock >
-                                        Падение напряжения<LineBreak/> на оп. диоде мин., В
+                                        Прям. пад. напр.<LineBreak/> на оп. диоде мин., В
                                     </TextBlock>
                                 </Setter.Value>
                             </Setter>
@@ -230,7 +230,7 @@
                             <Setter Property="Content">
                                 <Setter.Value>
                                     <TextBlock >
-Падение напряжения<LineBreak/> на оп. диоде макс., В
+Прям. пад. напр.<LineBreak/> на оп. диоде макс., В
                                     </TextBlock>
                                 </Setter.Value>
                             </Setter>

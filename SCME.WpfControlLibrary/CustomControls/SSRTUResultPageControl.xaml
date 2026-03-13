@@ -184,19 +184,19 @@
             <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetLeakageCurrent4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
 
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 1, В" Grid.Column="0" Grid.Row="5" FontSize="18"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пр. пад. U на оп. диоде 1, В" Grid.Column="0" Grid.Row="5" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="5" Background="{Binding IGBTOrMosfetResidualVoltage1.IsOk, Converter={StaticResource B2B}}">
             <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage1.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 2, В" Grid.Column="0" Grid.Row="6" FontSize="18"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пр. пад. U на оп. диоде 2, В" Grid.Column="0" Grid.Row="6" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="6" Background="{Binding IGBTOrMosfetResidualVoltage2.IsOk, Converter={StaticResource B2B}}">
             <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage2.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 3, В" Grid.Column="0" Grid.Row="7" FontSize="18"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пр. пад. U на оп. диоде 3, В" Grid.Column="0" Grid.Row="7" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="7" Background="{Binding IGBTOrMosfetResidualVoltage3.IsOk, Converter={StaticResource B2B}}">
             <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage3.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>
-        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пад. напр. на оп. диоде 4, В" Grid.Column="0" Grid.Row="8" FontSize="18"/>
+        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="Пр. пад. U на оп. диоде 4, В" Grid.Column="0" Grid.Row="8" FontSize="18"/>
         <Border Grid.Column="1" Grid.Row="8" Background="{Binding IGBTOrMosfetResidualVoltage4.IsOk, Converter={StaticResource B2B}}">
             <TextBlock Style="{StaticResource DefaultTextBlock}" Text="{Binding IGBTOrMosfetResidualVoltage4.Value, Converter={StaticResource DN2S}, StringFormat=N3}" HorizontalAlignment="Center" FontSize="18" />
         </Border>

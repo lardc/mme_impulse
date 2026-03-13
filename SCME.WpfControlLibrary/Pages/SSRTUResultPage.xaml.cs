@@ -1000,7 +1000,7 @@ namespace SCME.WpfControlLibrary.Pages
             //    AddCellThString($"Порог. напр. з-и {i.Key}, В", tr);
             
             foreach (var i in values.SelectMany(m => m.IGBTOrMosfetResidualVoltages).Where(m => m.Min != null && !m.UseEx).OrderBy(m => m.Index).GroupBy(m => m.Index))
-                AddCellThString($"Пад. напр. на оп. диоде {i.Key}, В", tr);
+                AddCellThString($"Пр. пад. напр. на оп. диоде {i.Key}, В", tr);
             foreach (var i in values.SelectMany(m => m.IGBTOrMosfetResidualVoltages).Where(m => m.MinEx != null).OrderBy(m => m.Index).GroupBy(m => m.Index))
                 AddCellThString($"Сопр. сток-исток {i.Key}, Ом", tr);
 
@@ -1045,7 +1045,7 @@ namespace SCME.WpfControlLibrary.Pages
                                 test = t.IsIGBTOrMosfet ? "Сопротивление канала сток-исток" : "Сопротивление в открытом состоянии";
                             //Падение напряжения на оппоз. диоде
                             else
-                                test = t.IsIGBTOrMosfet ? "Падение напряжения на оппоз. диоде" : type.Name;
+                                test = t.IsIGBTOrMosfet ? "Пр. пад. напряжения на оппоз. диоде" : type.Name;
                         }
                         //Параметры затвора-истока
                         if (type.TestParametersType == TestParametersType.InputOptions)
